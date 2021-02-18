@@ -1,0 +1,36 @@
+- name: restart tomcat
+  service:
+    name: tomcat
+    state: restarted
+  register: tomcat_status 
+  listen: "start services"
+
+- name:   
+  debug:
+     var: tomacat_status
+  listen: "start services"
+
+- name: restart nginx 
+  service:
+     name: nginx 
+     state: restarted
+  register: nginx_status
+  listen: "start services"
+
+- name:   
+  debug:
+     var: nginx_status
+  listen: "start services"
+
+- name: check services nginx_status
+  command: systemctl status "{{item}}"
+  with_items:
+    - nginx
+    - tomcat
+  register: result   
+  listen: "start services"  
+
+- name: showing report
+  debug:
+   var: result  
+  listen: "start services"  
