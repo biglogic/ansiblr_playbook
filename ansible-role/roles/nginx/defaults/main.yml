@@ -1,0 +1,12 @@
+---
+# defaults file for roles
+config:
+                 -  { regexp: '# cluster-enabled yes', line: 'cluster-enabled yes' }
+                 - { regexp: '# cluster-config-file nodes-6379.conf', line: 'cluster-config-file nodes-6379.conf' }
+                 - { regexp: '# cluster-node-timeout 15000', line: 'cluster-node-timeout 15000' }
+                 - {regexp: 'bind 127.0.0.1 -::1', line: 'bind 0.0.0.0'}
+
+version: 6.2.5
+folder: /opt
+packages:  ['gcc', 'wget', 'tar', 'make' , 'curl'] 
+

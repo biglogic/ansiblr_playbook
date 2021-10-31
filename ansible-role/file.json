@@ -1,0 +1,146 @@
+{
+    "_meta": {
+        "hostvars": {
+            "ec2-35-165-105-91.us-west-2.compute.amazonaws.com": {
+                "ami_launch_index": 0,
+                "ansible_host": "35.165.105.91",
+                "architecture": "x86_64",
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1",
+                        "ebs": {
+                            "attach_time": "2021-09-03T03:19:35+00:00",
+                            "delete_on_termination": true,
+                            "status": "attached",
+                            "volume_id": "vol-0d1a861dc579b2e8c"
+                        }
+                    }
+                ],
+                "capacity_reservation_specification": {
+                    "capacity_reservation_preference": "open"
+                },
+                "client_token": "",
+                "cpu_options": {
+                    "core_count": 1,
+                    "threads_per_core": 1
+                },
+                "ebs_optimized": false,
+                "ena_support": true,
+                "enclave_options": {
+                    "enabled": false
+                },
+                "hibernation_options": {
+                    "configured": false
+                },
+                "hypervisor": "xen",
+                "image_id": "ami-03d5c68bab01f3496",
+                "instance_id": "i-0d498bacf45869da0",
+                "instance_type": "t2.micro",
+                "key_name": "ubuntu",
+                "launch_time": "2021-09-03T07:43:35+00:00",
+                "metadata_options": {
+                    "http_endpoint": "enabled",
+                    "http_protocol_ipv6": "disabled",
+                    "http_put_response_hop_limit": 1,
+                    "http_tokens": "optional",
+                    "state": "applied"
+                },
+                "monitoring": {
+                    "state": "disabled"
+                },
+                "network_interfaces": [
+                    {
+                        "association": {
+                            "ip_owner_id": "amazon",
+                            "public_dns_name": "ec2-35-165-105-91.us-west-2.compute.amazonaws.com",
+                            "public_ip": "35.165.105.91"
+                        },
+                        "attachment": {
+                            "attach_time": "2021-09-03T03:19:34+00:00",
+                            "attachment_id": "eni-attach-0c42cffa85a49883a",
+                            "delete_on_termination": true,
+                            "device_index": 0,
+                            "network_card_index": 0,
+                            "status": "attached"
+                        },
+                        "description": "Primary network interface",
+                        "groups": [
+                            {
+                                "group_id": "sg-0195185264086a144",
+                                "group_name": "default"
+                            }
+                        ],
+                        "interface_type": "interface",
+                        "ipv6_addresses": [],
+                        "mac_address": "06:a2:f6:30:02:97",
+                        "network_interface_id": "eni-0bb4fddd072e48f7b",
+                        "owner_id": "276264014537",
+                        "private_dns_name": "ip-10-0-0-241.us-west-2.compute.internal",
+                        "private_ip_address": "10.0.0.241",
+                        "private_ip_addresses": [
+                            {
+                                "association": {
+                                    "ip_owner_id": "amazon",
+                                    "public_dns_name": "ec2-35-165-105-91.us-west-2.compute.amazonaws.com",
+                                    "public_ip": "35.165.105.91"
+                                },
+                                "primary": true,
+                                "private_dns_name": "ip-10-0-0-241.us-west-2.compute.internal",
+                                "private_ip_address": "10.0.0.241"
+                            }
+                        ],
+                        "source_dest_check": true,
+                        "status": "in-use",
+                        "subnet_id": "subnet-027ee1142a2b96b2f",
+                        "vpc_id": "vpc-01a81e1e2663cce8a"
+                    }
+                ],
+                "owner_id": "276264014537",
+                "placement": {
+                    "availability_zone": "us-west-2a",
+                    "group_name": "",
+                    "region": "us-west-2",
+                    "tenancy": "default"
+                },
+                "private_dns_name": "ip-10-0-0-241.us-west-2.compute.internal",
+                "private_ip_address": "10.0.0.241",
+                "product_codes": [],
+                "public_dns_name": "ec2-35-165-105-91.us-west-2.compute.amazonaws.com",
+                "public_ip_address": "35.165.105.91",
+                "requester_id": "",
+                "reservation_id": "r-07c96afd074b1db03",
+                "root_device_name": "/dev/sda1",
+                "root_device_type": "ebs",
+                "security_groups": [
+                    {
+                        "group_id": "sg-0195185264086a144",
+                        "group_name": "default"
+                    }
+                ],
+                "source_dest_check": true,
+                "state": {
+                    "code": 16,
+                    "name": "running"
+                },
+                "state_transition_reason": "",
+                "subnet_id": "subnet-027ee1142a2b96b2f",
+                "tags": {
+                    "NAME": "Ninja-atul"
+                },
+                "virtualization_type": "hvm",
+                "vpc_id": "vpc-01a81e1e2663cce8a"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "aws_ec2",
+            "ungrouped"
+        ]
+    },
+    "aws_ec2": {
+        "hosts": [
+            "ec2-35-165-105-91.us-west-2.compute.amazonaws.com"
+        ]
+    }
+}

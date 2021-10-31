@@ -1,0 +1,17 @@
+---
+plugin: aws_ec2
+aws_profile: atul2
+regions:
+  - us-west-2
+filters:
+    tag:Name:
+          - Ninja-*
+                 
+            #keyed_groups:
+            #- key: tags.Name
+  
+            #- key: tags.task
+compose:
+  ansible_host: public_ip_address  
+  instance-state-name : running
+  

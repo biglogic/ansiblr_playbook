@@ -1,0 +1,60 @@
+--- 
+  - name: Install Packages
+    yum:
+       name: "{{packages}}"
+       state: present
+    become: yes
+        
+  - name: Download redis
+    get_url:
+       url: https://download.redis.io/releases/redis-{{version}}.tar.gz     
+       dest: "{{folder}}"
+    become: yes   
+
+  - name: Extract redis
+    unarchive:
+             src: /opt/redis-{{version}}.tar.gz
+             dest: /opt/
+             remote_src: yes
+    become: yes
+
+  - name: install redis
+    shell: cd /opt/redis-{{version}}  && cd deps && make hiredis lua jemalloc linenoise && cd .. && make
+    become: yes
+   
+  - name: Add Redis in systemctl
+    lineinfile:
+                dest: /opt/redis-{{version}}/redis.conf
+                regexp: "{{ item.regexp }}"
+                line: "{{item.line}}"
+    with_items: "{{config}}"
+    become: yes
+    tags:
+        - redis_conf
+  
+  - name: Add Redis in systemctl
+    blockinfile:
+              dest: /etc/systemd/system/redis.service
+              create: yes
+              content: |
+                              [Unit]
+                              Description=Power-off gpu
+
+                              [Service]
+                              Type=deamon
+                              ExecStart=/opt/redis-{{version}}/src/redis-server /opt/redis-{{version}}/redis.conf
+                              ExecStop=/opt/redis-{{version}}/src/redis-server
+
+
+                              [Install]
+                              WantedBy=multi-user.target
+
+    notify:
+          - restart_deamon
+          - restart_redis
+    become: yes
+    tags:
+       - add
+    
+
+           
