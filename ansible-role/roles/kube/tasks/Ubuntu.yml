@@ -1,0 +1,64 @@
+---
+  - name: update
+    shell:  apt update 
+    become: yes
+    register: output
+
+  - debug:
+       var: output 
+
+  - name: Install package
+    apt: 
+       name: "{{packages}}"    
+       state: present
+    become: yes  
+
+  - name: get gpg key
+    shell:  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    register: output
+
+  - debug:
+      var: output    
+
+  - name:  add repositry in apt
+    blockinfile:
+         dest: /etc/apt/sources.list.d/kubernetes.list
+         create: yes
+         content: | 
+                     deb http://apt.kubernetes.io/ kubernetes-xenial main
+    become: yes
+
+  - name: update
+    command: 
+          cmd: apt-get update
+    become: yes
+    tags:
+      - test 
+
+  - name: install
+    apt: 
+        name: "{{packages2}}"
+        state: present 
+    become: yes 
+
+
+  - name: add line in deamon
+    blockinfile:
+          dest: /etc/docker/daemon.json  
+          create: yes
+          content: |
+
+                      {
+                        "exec-opts": ["native.cgroupdriver=systemd"],
+                        "log-driver": "json-file",
+                        "log-opts": {
+                          "max-size": "100m"
+                        },
+                        "storage-driver": "overlay2"
+                      }
+    become: yes
+    notify:
+         - restart_demon
+         - enable_docker
+         - restart_docker  
+

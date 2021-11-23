@@ -1,0 +1,4 @@
+---
+# vars file for kube
+packages: [ 'apt-transport-https', 'docker.io ' ]
+packages2: [ 'kubelet' , 'kubeadm' ,  'kubectl' ,  'kubernetes-cni' ]

@@ -1,6 +1,6 @@
 ---
 plugin: aws_ec2
-aws_profile: atul2
+aws_profile: atul
 regions:
   - us-west-2
 filters:
@@ -11,7 +11,11 @@ filters:
             #- key: tags.Name
   
             #- key: tags.task
+            #
+# hostnames:
+#     - network-interface.addresses.public-dns-name
 compose:
-  ansible_host: public_ip_address  
+  # ansible_host: public-dns-name
+  ansible_host: public_ip_address
   instance-state-name : running
   

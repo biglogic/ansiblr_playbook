@@ -5,4 +5,4 @@
     vars:
          ansible_ssh_private_key_file: ~/Downloads/ubuntu.pem    
     roles: 
-                - nginx   
+                - kube 
