@@ -1,0 +1,5 @@
+---
+# vars file for kube
+packages: [ 'apt-transport-https', 'ca-certificates' , 'curl' , 'gnupg' , 'lsb-release']
+docker: ['docker-ce', 'docker-ce-cli' , 'containerd.io ' ]
+packages2: [ 'kubelet' , 'kubeadm' ,  'kubectl' ,  'kubernetes-cni' ]

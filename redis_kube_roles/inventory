@@ -1,0 +1,2 @@
+user1 ansible_host=52.36.192.170 ansible_ssh_private_key_file=~/Downloads/ubuntu.pem ansible_user=ubuntu 
+user1 ansible_host=34.220.94.167 ansible_ssh_private_key_file=~/Downloads/ubuntu.pem ansible_user=centos

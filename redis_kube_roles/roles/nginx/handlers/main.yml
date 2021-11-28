@@ -1,0 +1,14 @@
+---
+# handlers file for roles
+  - name: restart_deamon
+    service:
+           name: deamon-reload
+    become: yes
+  
+  - name: restart_redis
+    service: 
+           name: redis
+           state: restarted 
+    become: yes 
+
+

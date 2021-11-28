@@ -1,0 +1,12 @@
+---
+  - name: restart_demon 
+    service:
+           name: deamon-reload
+    become: yes
+
+  - name:  restart_docker
+    service:
+        name: docker
+        state: restarted
+    become: yes             
+# handlers file for kube
