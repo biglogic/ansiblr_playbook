@@ -1,6 +1,0 @@
----
-  - hosts: tag_Ubuntu
-    user: ubuntu
-    gather_facts: yes
-    roles:
-                - pmm_monitering
