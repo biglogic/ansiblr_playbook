@@ -1,0 +1,8 @@
+---
+# tasks file for roles
+  - name: Gather OS specific variables
+    include_vars: "{{item}}"
+    loop: 
+        - "{{ansible_distribution}}.yml"
+        - "password.yml"
+  - include_tasks:  "{{ansible_distribution}}.yml"

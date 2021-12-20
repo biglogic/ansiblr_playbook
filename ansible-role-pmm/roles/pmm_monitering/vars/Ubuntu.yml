@@ -1,0 +1,10 @@
+---
+volume_name: pmm-data
+service_name: "Mysql_db"
+ansible_python_interpreter: /usr/bin/python3
+ansible_ssh_private_key_file: ~/Downloads/ubuntu.pem
+Packages: ['python3-pip', 'virtualenv', 'python3-setuptools' , 'docker.io' , 'python3-docker' ]
+python_module: 'docker-py' 
+container_name: pmm-server1
+images: percona/pmm-server:2
+

@@ -1,0 +1,120 @@
+---
+  - name: update_apt 
+    shell: apt-get update
+    become: yes
+
+  - name: Install_required_packages
+    apt: 
+        name: "{{Packages}}"
+        state: present
+    become: yes
+
+  - name: 
+    shell: echo $(lsb_release -sc)
+    register: lsb_release
+     
+      
+  - name: install_precorna_latest_repo
+    get_url:
+       url: https://repo.percona.com/apt/percona-release_latest.{{lsb_release.stdout}}_all.deb
+       dest: /home/ubuntu/percona-release_latest.{{lsb_release.stdout}}_all.deb
+    become: yes      
+
+  - name: Install my_package
+    apt: deb=/home/ubuntu/percona-release_latest.{{lsb_release.stdout}}_all.deb
+    become: yes
+    register: status
+
+  - name: update_apt
+    shell: apt-get update
+    become: yes
+    when: status.changed 
+
+  - name: install_pmm_client
+    apt:
+        name: pmm2-client
+        state: present
+    become: yes
+  
+  - name: install python module 
+    command: pip3 install {{python_module}}
+    become: yes
+    
+  - name: Docker module install
+    pip: 
+      name: "{{python_module}}" 
+
+        
+  - name: Pull default Docker image
+    docker_image:
+        name: "{{images}}"
+        source: pull
+    become: yes    
+
+  - name: Get infos on container
+    docker_container_info:
+      name: "{{volume_name}}"
+    register: result
+    become: yes
+
+  - debug:
+          var: result
+
+  - name: Create a volume
+    shell: "docker create --volume /srv --name {{volume_name}} {{images}} /bin/true "
+    become: yes
+    when: result.exists == false
+
+
+  - name: Get infos on container
+    docker_container_info:
+       name: "{{container_name}}"
+    register: container
+    become: yes
+
+  - debug:
+          var: container.container.State.Status 
+
+  - name: Create default containers
+    docker_container:
+        name: "{{container_name}}"
+        image: "{{images}}"
+        state: present
+        restart: yes
+        volumes_from:
+                - "{{volume_name}}"
+        ports:
+           - "443:443"
+        state: started
+    become: yes   
+    when: container.exists == false or container.container.State.Status != "running"
+    register: status
+
+  - debug:
+          var: status
+
+  - name: Run a simple command (command)
+    command: docker exec "{{container_name}}"  bash -c  "ln -s /srv/grafana /usr/share/grafana/data; grafana-cli --homepath /usr/share/grafana admin reset-admin-password  {{Password}}"
+    register: result
+    become: yes
+    register: container_status
+    when: status.changed 
+
+  - debug:
+      var: container_status  
+    
+  - name: Connecting pmm agent 
+    command: pmm-admin config  --server-insecure-tls  --server-url=https://admin:{{Password}}@localhost
+    become: yes
+    when: container_status.changed
+
+  - name: checking service name 
+    shell: "pmm-admin list  | awk -v service={{service_name}} '{if($2 == service)print$2}'" 
+    register: service_status
+
+  - name: Connecting database
+    shell: "pmm-admin add mysql --host {{DB_endpoint}} --password {{DB_password}} --username {{DB_username}} {{service_name}}"
+    become: yes
+    when: service_status.stdout != ""
+
+    
