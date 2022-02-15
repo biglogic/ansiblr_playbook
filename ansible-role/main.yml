@@ -3,6 +3,6 @@
     user: ubuntu
     gather_facts: yes
     vars:
-         ansible_ssh_private_key_file: ~/Downloads/ubuntu.pem    
+         ansible_ssh_private_key_file: ~/Downloads/pem/ubuntu2.pem    
     roles: 
                 - kube 

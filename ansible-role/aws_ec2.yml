@@ -5,8 +5,8 @@ regions:
   - us-west-2
 filters:
     tag:Name:
-          - Ninja-*
-                 
+          - kuber*
+          - worker*       
             #keyed_groups:
             #- key: tags.Name
   
