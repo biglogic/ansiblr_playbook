@@ -1,5 +1,5 @@
 ---
-  - hosts: aws_ec2
+  - hosts: kube_cluster
     user: ubuntu
     gather_facts: yes
     vars:
