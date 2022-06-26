@@ -1,7 +1,7 @@
 ---
 # tasks file for kube
-  # - include_tasks: "{{ansible_distribution}}.yml" 
-  #   when: inventory_hostname in groups['kube_cluster'] 
+  - include_tasks: "{{ansible_distribution}}.yml" 
+    when: inventory_hostname in groups['kube_cluster'] 
 
   - include_tasks: "master.yml"
     when: inventory_hostname in groups['master']

@@ -1,11 +1,11 @@
 [master]
-masternode1 ansible_ssh_host=35.164.142.28 master_id=0
+masternode1 ansible_ssh_host=34.220.28.64 master_id=0
 #masternode2 ansible_ssh_host=34.219.216.90 master_id=0
 #masternode3 ansible_ssh_host=34.220.25.214 master_id=0
 #masternode2 ansible_ssh_host=35.87.213.12 master_id=1
 
 [slave]
-slavenode1 ansible_ssh_host=35.90.86.179 master_id=2
+slavenode1 ansible_ssh_host=54.186.126.125 master_id=2
 #slavenode2 ansible_ssh_host=35.88.178.16 master_id=0
 #slavenode3 ansible_ssh_host=54.184.196.58 master_id=0
 
