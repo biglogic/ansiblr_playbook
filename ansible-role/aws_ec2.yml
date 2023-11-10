@@ -2,20 +2,21 @@
 plugin: aws_ec2
 aws_profile: atul
 regions:
-  - us-west-2
+  - us-east-1
 filters:
-    tag:Name:
-          - kuber*
-          - worker*       
+    tag:Environment:
+          - staging
+            #- worker*       
             #keyed_groups:
             #- key: tags.Name
   
             #- key: tags.task
             #
-# hostnames:
-#     - network-interface.addresses.public-dns-name
+hostnames:
+        - network-interface.addresses.private-dns-name
 compose:
-  # ansible_host: public-dns-name
-  ansible_host: public_ip_address
+  #ansible_host: public-dns-name
+  # ansible_host: public_dns_name
+  ansible_host: private_ip_address
   instance-state-name : running
   

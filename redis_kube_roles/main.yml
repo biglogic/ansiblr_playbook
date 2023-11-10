@@ -1,8 +1,12 @@
 ---
-  - hosts: kube_cluster
-    user: ubuntu
+  - hosts: localhost
+    user: localhost
     gather_facts: yes
     vars:
-         ansible_ssh_private_key_file: ~/Downloads/pem/ubuntu2.pem    
-    roles: 
-                - kube 
+         ansible_ssh_private_key_file: ~/jenkins_atul.pem    
+           #roles: 
+           #    - kube
+    tasks: 
+          - name: echo name
+            cmd: "echo hello"
+                
